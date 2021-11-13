@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { useActions } from "../../../hooks/useActions";
 import Form from "../components/form";
-// import Form from "../components/form";
-// import Button from "@mui/material/Button";
-// import Form from "./components/form";
-
 interface loginForm {
   email: string;
   password: string;

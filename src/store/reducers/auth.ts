@@ -25,6 +25,9 @@ const initialState: StateTyp = {
     userName: "",
     __v: 0,
     _id: "",
+    billingPlan: "",
+    visits: 0,
+    Click: 0,
   },
   error: "",
   loading: false,
@@ -53,6 +56,11 @@ export const userData = (
         error: "",
         updateToken: false,
         loading: false,
+      };
+    case UserActionTypes.USER_DATA_UPDATE_CLICK:
+      state.user.Click += 1;
+      return {
+        ...state,
       };
     default:
       return state;

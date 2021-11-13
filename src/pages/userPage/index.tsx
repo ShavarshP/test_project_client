@@ -6,13 +6,12 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useActions } from "../../hooks/useActions";
 
 const UserPage: React.FC = () => {
   const { user } = useTypedSelector((state) => state.user);
-  console.log(
-    "ssss",
-    useTypedSelector((state) => state.user)
-  );
+  console.log("ssss", user);
+  const { updateClickCount } = useActions();
 
   const card = (
     <React.Fragment>
@@ -21,13 +20,13 @@ const UserPage: React.FC = () => {
           Name
         </Typography>
         <Typography variant="h5" component="div">
-          {"Shavarsh"}
+          {user.userName}
         </Typography>
         <br />
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           billing plan
         </Typography>
-        <Typography variant="h5">{"standard"}</Typography>
+        <Typography variant="h5">{user.billingPlan}</Typography>
       </CardContent>
     </React.Fragment>
   );
@@ -42,10 +41,14 @@ const UserPage: React.FC = () => {
         </div>
         <div style={{ padding: "12px" }}>
           <b style={{ fontSize: "20px" }}>
-            number of button presses <h2>{"5"}</h2>
+            number of button presses <h2>{user.Click}</h2>
           </b>
 
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={updateClickCount}
+          >
             Button
           </Button>
         </div>

@@ -2,7 +2,6 @@ import React from "react";
 import { Button, TextField, Grid, Paper, Typography } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
-// import { BRAND_NAME } from "../constants";
 
 interface loginForm {
   isLogin: boolean;

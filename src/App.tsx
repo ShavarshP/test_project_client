@@ -20,7 +20,7 @@ const App = () => {
   );
   if (!loading && !error) {
     getUserData();
-  } else if (!updateToken && error && !loading) {
+  } else if (!updateToken && error) {
     console.log("getUserData();");
     updateAccessToken();
   }

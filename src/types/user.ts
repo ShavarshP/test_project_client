@@ -15,6 +15,9 @@ export interface User {
   userName: string;
   __v: number;
   _id: string;
+  billingPlan: string;
+  visits: number;
+  Click: number;
 }
 
 // export enum TodoActionTypes {
@@ -29,6 +32,7 @@ export enum UserActionTypes {
   FETCH_USER_ERROR = "FETCH_USER_ERROR",
   FETCH_UPDATE_TOKEN_ERROR = "FETCH_UPDATE_TOKEN_ERROR",
   FETCH_UPDATE_TOKEN = "FETCH_UPDATE_TOKEN",
+  USER_DATA_UPDATE_CLICK = "USER_DATA_UPDATE_CLICK",
 }
 
 // interface FetchTodoAction {
@@ -42,7 +46,10 @@ interface FetchUserErrorAction {
   type: UserActionTypes.FETCH_USER_ERROR;
   payload: string;
 }
-
+interface UserUpdateUpdateClick {
+  type: UserActionTypes.USER_DATA_UPDATE_CLICK;
+  payload: number;
+}
 interface FetchUpdateTokenErrorAction {
   type: UserActionTypes.FETCH_UPDATE_TOKEN_ERROR;
   payload: string;
@@ -70,4 +77,5 @@ export type UserAction =
   | GetUserData
   | FetchUserErrorAction
   | FetchUpdateTokenErrorAction
-  | FetchUpdateTokenAction;
+  | FetchUpdateTokenAction
+  | UserUpdateUpdateClick;

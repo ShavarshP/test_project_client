@@ -1,22 +1,23 @@
-import React, { useState } from "react";
-import {
-  Button,
-  TextField,
-  Grid,
-  Paper,
-  Typography,
-  Link,
-} from "@material-ui/core";
+import React from "react";
+import { Button, TextField, Grid, Paper, Typography } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 // import { BRAND_NAME } from "../constants";
 
 interface loginForm {
   isLogin: boolean;
+  onSubmit(data: any): void;
+  isValid(data: any): void;
+  valid: {
+    userName: boolean;
+    email: boolean;
+    password: boolean;
+  };
 }
 
-const Form: React.FC<loginForm> = ({ isLogin }) => {
+const Form: React.FC<loginForm> = ({ isLogin, onSubmit, isValid, valid }) => {
   // const login = false;
+  const { register, handleSubmit } = useForm();
 
   // const registr = () => {};
   // const login = () => {};
@@ -40,60 +41,46 @@ const Form: React.FC<loginForm> = ({ isLogin }) => {
                 </Typography>
               </Grid>
               <Grid item>
-                <form>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  onChange={handleSubmit(isValid)}
+                >
+                  {isLogin ? (
+                    <Grid item>
+                      <TextField
+                        type="user name"
+                        placeholder="User Name"
+                        fullWidth
+                        variant="outlined"
+                        {...register("userName")}
+                        error={valid.userName}
+                        required
+                        autoFocus={false}
+                      />
+                    </Grid>
+                  ) : null}
                   <Grid container direction="column" spacing={2}>
                     <Grid item>
                       <TextField
                         type="email"
                         placeholder="Email"
                         fullWidth
-                        name="username"
                         variant="outlined"
-                        // value={this.state.username}
-                        onChange={
-                          (event) => {}
-                          // this.setState({
-                          //   [event.target.name]: event.target.value,
-                          // })
-                        }
+                        {...register("email")}
+                        error={valid.email}
                         required
                         autoFocus
                       />
                     </Grid>
-                    {isLogin ? (
-                      <Grid item>
-                        <TextField
-                          type="user name"
-                          placeholder="User Name"
-                          fullWidth
-                          name="text"
-                          variant="outlined"
-                          // value={this.state.username}
-                          onChange={
-                            (event) => {}
-                            // this.setState({
-                            //   [event.target.name]: event.target.value,
-                            // })
-                          }
-                          required
-                          autoFocus
-                        />
-                      </Grid>
-                    ) : null}
+
                     <Grid item>
                       <TextField
                         type="password"
                         placeholder="Password"
                         fullWidth
-                        name="password"
                         variant="outlined"
-                        // value={this.state.password}
-                        onChange={
-                          (event) => {}
-                          // this.setState({
-                          //   [event.target.name]: event.target.value,
-                          // })
-                        }
+                        {...register("password")}
+                        error={valid.password}
                         required
                       />
                     </Grid>

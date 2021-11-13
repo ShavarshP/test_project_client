@@ -1,4 +1,4 @@
-export const loadState = (stateName) => {
+export const loadState = (stateName: string) => {
   try {
     const serializedState = localStorage.getItem(stateName);
     if (serializedState === null) {
@@ -10,7 +10,7 @@ export const loadState = (stateName) => {
   }
 };
 
-export const saveState = (state, stateName) => {
+export const saveState = (stateName: string, state: any) => {
   try {
     const serializedState = JSON.stringify(state);
     localStorage.setItem(stateName, serializedState);

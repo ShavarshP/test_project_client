@@ -5,8 +5,15 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 const UserPage: React.FC = () => {
+  const { user } = useTypedSelector((state) => state.user);
+  console.log(
+    "ssss",
+    useTypedSelector((state) => state.user)
+  );
+
   const card = (
     <React.Fragment>
       <CardContent>
@@ -34,9 +41,9 @@ const UserPage: React.FC = () => {
           </Box>
         </div>
         <div style={{ padding: "12px" }}>
-          <h3>
+          <b style={{ fontSize: "20px" }}>
             number of button presses <h2>{"5"}</h2>
-          </h3>
+          </b>
 
           <Button variant="contained" color="primary">
             Button

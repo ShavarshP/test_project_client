@@ -17,13 +17,33 @@ export const updateClickCount = () => {
         },
       });
       console.log(data);
-      dispatch({
-        type: UserActionTypes.USER_DATA_UPDATE_CLICK,
-        payload: 1,
-      });
     } catch (e) {
       dispatch({
         type: UserActionTypes.FETCH_USER_ERROR,
+        payload: "An error has occurred",
+      });
+    }
+  };
+};
+
+export const getAllUserData = () => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      const token = await loadState("accessToken");
+      const user = await axios.get(`${API_URL}/all-users`, {
+        headers: {
+          Authorization: `Bearer ${token.accessToken}`,
+          withCredentials: true,
+        },
+      });
+      console.log(user.data.users);
+      dispatch({
+        type: UserActionTypes.ALL_USER_DATA_REGISTER,
+        payload: user.data.users,
+      });
+    } catch (e) {
+      dispatch({
+        type: UserActionTypes.ALL_FETCH_USER_ERROR,
         payload: "An error has occurred",
       });
     }

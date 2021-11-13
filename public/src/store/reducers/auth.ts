@@ -1,12 +1,4 @@
-// import { GetUserData, TodoActionTypes, TodoState } from "../../types/todo";
-
-import {
-  //   TodoActionTypes,
-  User,
-  UserAction,
-  UserActionTypes,
-  //   UserActionTypes2,
-} from "../../types/user";
+import { User, UserAction, UserActionTypes } from "../../types/user";
 
 interface StateTyp {
   user: User;

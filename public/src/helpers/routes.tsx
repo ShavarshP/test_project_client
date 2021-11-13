@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useTypedSelector } from "../hooks/useTypedSelector";
+import Management from "../pages/management";
 import LogIn from "../pages/register/logIn";
 import SignUp from "../pages/register/signUp";
 import UserPage from "../pages/userPage";
@@ -13,7 +14,7 @@ export const useRoutes = () => {
   );
   return (
     <Switch>
-      {!user.userName ? (
+      {!user._id ? (
         <>
           <Route path="/login">
             <LogIn />
@@ -26,7 +27,7 @@ export const useRoutes = () => {
       ) : (
         <>
           <Route path="/home">
-            <UserPage />
+            {user.status === "admin" ? <Management /> : <UserPage />}
           </Route>
           <Redirect to="/home" />
         </>

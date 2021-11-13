@@ -1,15 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { loadState } from "./helpers/localStorage";
 import { useRoutes } from "./helpers/routes";
 import { useActions } from "./hooks/useActions";
 import { useTypedSelector } from "./hooks/useTypedSelector";
-// import Register from "./pages/register/logIn.js";
-// import UserList from "./components/UserList";
-// import TodoList from "./components/TodoList";
-// import Management from "./pages/management";
-// import UserConfig from "./pages/userConfig";
-// import UserPage from "./pages/userPage";
 
 const App = () => {
   const { getUserData, updateAccessToken } = useActions();

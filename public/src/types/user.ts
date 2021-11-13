@@ -33,19 +33,24 @@ export enum UserActionTypes {
   FETCH_UPDATE_TOKEN_ERROR = "FETCH_UPDATE_TOKEN_ERROR",
   FETCH_UPDATE_TOKEN = "FETCH_UPDATE_TOKEN",
   USER_DATA_UPDATE_CLICK = "USER_DATA_UPDATE_CLICK",
+  ALL_USER_DATA_REGISTER = "ALL_USER_DATA_REGISTER",
+  ALL_FETCH_USER_ERROR = "ALL_FETCH_USER_ERROR",
 }
 
-// interface FetchTodoAction {
-//   type: TodoActionTypes.FETCH_TODOS;
-// }
-// interface FetchTodoSuccessAction {
-//   type: TodoActionTypes.FETCH_TODOS_SUCCESS;
-//   payload: any[];
-// }
 interface FetchUserErrorAction {
   type: UserActionTypes.FETCH_USER_ERROR;
   payload: string;
 }
+interface AllFetchUserErrorAction {
+  type: UserActionTypes.ALL_FETCH_USER_ERROR;
+  payload: string;
+}
+
+interface GetAllUserData {
+  type: UserActionTypes.ALL_USER_DATA_REGISTER;
+  payload: User[];
+}
+
 interface UserUpdateUpdateClick {
   type: UserActionTypes.USER_DATA_UPDATE_CLICK;
   payload: number;
@@ -58,24 +63,17 @@ interface FetchUpdateTokenAction {
   type: UserActionTypes.FETCH_UPDATE_TOKEN;
   payload: string;
 }
-// interface SetTodoPage {
-//   type: TodoActionTypes.SET_TODO_PAGE;
-//   payload: number;
-// }
+
 interface GetUserData {
   type: UserActionTypes.USER_DATA_REGISTER;
   payload: User;
 }
-
-// export type TodoAction =
-//   | FetchTodoAction
-//   | FetchTodoErrorAction
-//   | FetchTodoSuccessAction
-//   | SetTodoPage;
 
 export type UserAction =
   | GetUserData
   | FetchUserErrorAction
   | FetchUpdateTokenErrorAction
   | FetchUpdateTokenAction
-  | UserUpdateUpdateClick;
+  | UserUpdateUpdateClick
+  | GetAllUserData
+  | AllFetchUserErrorAction;

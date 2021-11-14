@@ -28,7 +28,6 @@ const Management: React.FC = () => {
   const { allUsers, adminLoading } = useTypedSelector((state) => state.admin);
   const { getAllUserData } = useActions();
 
-  console.log("ssss", allUsers);
   if (!adminLoading) {
     getAllUserData();
   } else {

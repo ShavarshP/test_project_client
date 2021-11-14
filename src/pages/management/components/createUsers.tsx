@@ -4,6 +4,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
+import { useHistory } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -48,9 +49,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const CreateUsers: React.FC = () => {
+  let history = useHistory();
+
   return (
     <form>
-      <Button variant="contained" color="success" style={{ margin: "20px" }}>
+      <Button
+        onClick={() => {
+          history.push("user_config");
+        }}
+        variant="contained"
+        color="success"
+        style={{ margin: "20px" }}
+      >
         Add new user
       </Button>
       <br />

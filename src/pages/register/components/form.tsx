@@ -9,6 +9,7 @@ interface loginForm {
   isValid(data: any): void;
   valid: {
     userName: boolean;
+    fullName:boolean;
     email: boolean;
     password: boolean;
   };
@@ -45,18 +46,32 @@ const Form: React.FC<loginForm> = ({ isLogin, onSubmit, isValid, valid }) => {
                   onChange={handleSubmit(isValid)}
                 >
                   {isLogin ? (
+                    <>
+                    <Grid item>
+                    <TextField
+                      type="user name"
+                      placeholder="User Name"
+                      fullWidth
+                      variant="outlined"
+                      {...register("userName")}
+                      error={valid.userName}
+                      required
+                      autoFocus={false}
+                    />
+                  </Grid>
                     <Grid item>
                       <TextField
                         type="user name"
                         placeholder="User Name"
                         fullWidth
                         variant="outlined"
-                        {...register("userName")}
-                        error={valid.userName}
+                        {...register("fullName")}
+                        error={valid.fullName}
                         required
                         autoFocus={false}
                       />
                     </Grid>
+                    </>
                   ) : null}
                   <Grid container direction="column" spacing={2}>
                     <Grid item>

@@ -37,6 +37,8 @@ export const authLogin = (email: string, password: string) => {
 export const registration = (
   email: string,
   userName: string,
+  fullName: string,
+  billingPlan: string,
   password: string
 ) => {
   return async (dispatch: Dispatch<UserAction>) => {
@@ -46,6 +48,8 @@ export const registration = (
         {
           email: email,
           userName: userName,
+          fullName: fullName,
+          billingPlan: billingPlan,
           password: password,
         },
         { withCredentials: true }

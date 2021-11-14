@@ -4,6 +4,7 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 import Management from "../pages/management";
 import LogIn from "../pages/register/logIn";
 import SignUp from "../pages/register/signUp";
+import UserConfig from "../pages/userConfig";
 import UserPage from "../pages/userPage";
 
 export const useRoutes = () => {
@@ -24,10 +25,20 @@ export const useRoutes = () => {
           </Route>
           <Redirect to="/login" />
         </>
+      ) : user.status === "admin" ? (
+        <>
+          <Route path="/home">
+            <Management />
+          </Route>
+          <Route path="/user_config">
+            <UserConfig />
+          </Route>
+          <Redirect to="/home" />
+        </>
       ) : (
         <>
           <Route path="/home">
-            {user.status === "admin" ? <Management /> : <UserPage />}
+            <UserPage />
           </Route>
           <Redirect to="/home" />
         </>

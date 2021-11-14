@@ -19,11 +19,6 @@ const App = () => {
   }
   console.log(useTypedSelector((state) => state.user));
 
-  // console.log(
-  //   "ssss",
-  //   useTypedSelector((state) => state.user)
-  // );
-
   return (
     <div style={{ display: "flex", justifyContent: "center", padding: "5%" }}>
       {!loading ? (
@@ -33,13 +28,6 @@ const App = () => {
           <Router>{router}</Router>
         </>
       )}
-      {/* <Register /> */}
-      {/* <UserPage /> */}
-      {/* <Management /> */}
-      {/* <UserConfig /> */}
-      {/* <UserList/>
-            <hr/>
-            <TodoList/> */}
     </div>
   );
 };

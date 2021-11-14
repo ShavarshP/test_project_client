@@ -7,6 +7,7 @@ interface loginForm {
 }
 interface dataForm {
   userName: boolean;
+  fullName:boolean
   email: boolean;
   password: boolean;
 }
@@ -14,13 +15,14 @@ interface dataForm {
 const LogIn: React.FC = () => {
   const [valid, setValid] = useState<dataForm>({
     userName: false,
+    fullName:false,
     email: false,
     password: false,
   });
   const { authLogin } = useActions();
 
   const onSubmit = (data: loginForm) => {
-    if (!valid.email && !valid.password && !valid.userName) {
+    if (!valid.email && !valid.password && !valid.userName && !valid.fullName) {
       authLogin(data.email, data.password);
     } else {
       alert("invalid data");
@@ -35,6 +37,7 @@ const LogIn: React.FC = () => {
 
     setValid({
       userName: false,
+      fullName:false,
       email: !emailValue,
       password: !passwordValue,
     });

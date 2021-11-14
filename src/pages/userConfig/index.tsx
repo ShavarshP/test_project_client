@@ -15,6 +15,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import { useActions } from "../../hooks/useActions";
 
 const billingPlan = [
   { name: "standard", price: "  0$", id: 10 },
@@ -25,15 +26,49 @@ const billingPlan = [
 const UserConfig: React.FC = () => {
   const [values, setValues] = React.useState({
     userName: "",
+    fullName: "",
     email: "",
     password: "",
     billingPlan: "",
     showPassword: false,
   });
 
-  const handleChange = (prop: any) => (event: any) => {
-    setValues({ ...values, [prop]: event.target.value });
+  const { AdminRegistration, setLoading } = useActions();
+
+  const onSubmit = async () => {
+    const name = /^([A-Za-zéàë]{2,40} ?)+$/;
+    const email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    const password = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    const nameValue = name.test(values.fullName) || values.fullName === "";
+    const passwordValue =
+      password.test(values.password) || values.password === "";
+    const emailValue = email.test(values.email) || values.email === "";
+    const fullNameValue = name.test(values.fullName) || values.fullName === "";
+    if (
+      nameValue &&
+      passwordValue &&
+      emailValue &&
+      fullNameValue &&
+      values.billingPlan
+    ) {
+      await setLoading(false);
+      await AdminRegistration(
+        values.email,
+        values.userName,
+        values.fullName,
+        values.billingPlan,
+        values.password
+      );
+    } else {
+      alert("ss");
+    }
+    setLoading(true);
   };
+
+  const handleChange =
+    (prop: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValues({ ...values, [prop]: event.target.value });
+    };
 
   const handleClickShowPassword = () => {
     setValues({
@@ -42,7 +77,7 @@ const UserConfig: React.FC = () => {
     });
   };
 
-  const handleMouseDownPassword = (event: any) => {
+  const handleMouseDownPassword = (event: React.MouseEvent) => {
     event.preventDefault();
   };
 
@@ -60,6 +95,22 @@ const UserConfig: React.FC = () => {
           <div>
             <div style={{ display: "flex" }}>
               <Grid item xs={12} sm={6} m={1}>
+                <Grid item xs={12} sm={6} m={1}>
+                  <TextField
+                    required
+                    id="fullName"
+                    name="fullName"
+                    label="fullName"
+                    fullWidth
+                    margin="dense"
+                    error={"" ? true : false}
+                    value={values.fullName}
+                    onChange={handleChange("fullName")}
+                  />
+                  <Typography variant="inherit" color="textSecondary">
+                    {/* {errors.username?.message} */}
+                  </Typography>
+                </Grid>
                 <TextField
                   required
                   id="username"
@@ -159,6 +210,16 @@ const UserConfig: React.FC = () => {
           </div>
         </Box>
       </div>
+      <Button
+        onClick={() => {
+          onSubmit();
+        }}
+        variant="contained"
+        color="success"
+        style={{ margin: "20px" }}
+      >
+        Add new user
+      </Button>
     </div>
   );
 };

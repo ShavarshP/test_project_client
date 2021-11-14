@@ -15,6 +15,7 @@ const initialState: StateTyp = {
     password: "",
     status: "",
     userName: "",
+    fullName:"",
     __v: 0,
     _id: "",
     billingPlan: "",
@@ -47,6 +48,11 @@ export const userData = (
         ...state,
         error: "",
         updateToken: false,
+        loading: false,
+      };
+    case UserActionTypes.DATA_LOADING:
+      return {
+        ...state,
         loading: false,
       };
     case UserActionTypes.USER_DATA_UPDATE_CLICK:

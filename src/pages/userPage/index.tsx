@@ -10,7 +10,6 @@ import { useActions } from "../../hooks/useActions";
 
 const UserPage: React.FC = () => {
   const { user } = useTypedSelector((state) => state.user);
-  console.log("ssss", user);
   const { updateClickCount } = useActions();
 
   const card = (
@@ -32,7 +31,7 @@ const UserPage: React.FC = () => {
   );
   return (
     <div>
-      <h2>admin mail admin@mail.com password Q12345678</h2>
+      <h2>admin mail admin@gmail.com password Q12345678</h2>
       <div className={styles.container}>
         <div>
           <Box sx={{ minWidth: 275 }}>

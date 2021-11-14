@@ -49,3 +49,70 @@ export const getAllUserData = () => {
     }
   };
 };
+
+export const AdminRegistration = (
+  email: string,
+  userName: string,
+  fullName: string,
+  billingPlan: string,
+  password: string
+) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      await axios.post("http://localhost:5000/api/registration", {
+        email: email,
+        userName: userName,
+        fullName: fullName,
+        billingPlan: billingPlan,
+        password: password,
+      });
+      dispatch({
+        type: UserActionTypes.DATA_LOADING,
+        payload: true,
+      });
+    } catch (e) {
+      dispatch({
+        type: UserActionTypes.FETCH_USER_ERROR,
+        payload: "An error has occurred",
+      });
+    }
+  };
+};
+
+export const updateUserData = (
+  email: string,
+  userName: string,
+  fullName: string,
+  billingPlan: string,
+  password: string
+) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      await axios.put("http://localhost:5000/api/registration", {
+        email: email,
+        userName: userName,
+        fullName: fullName,
+        billingPlan: billingPlan,
+        password: password,
+      });
+      dispatch({
+        type: UserActionTypes.DATA_LOADING,
+        payload: true,
+      });
+    } catch (e) {
+      dispatch({
+        type: UserActionTypes.FETCH_USER_ERROR,
+        payload: "An error has occurred",
+      });
+    }
+  };
+};
+
+export const setLoading = (payload: boolean) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    dispatch({
+      type: UserActionTypes.DATA_LOADING,
+      payload: payload,
+    });
+  };
+};

@@ -23,11 +23,7 @@ interface userData {
 }
 
 const UserList: React.FC<userData> = ({ data }) => {
-  console.log(data);
   const rows = data;
-  // const rows = data.map((item) =>
-  //   createData(item.userName, item.billingPlan, item.visits, item.Click)
-  // );
   return (
     <TableContainer component={Paper} style={{ height: "300px" }}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -42,7 +38,7 @@ const UserList: React.FC<userData> = ({ data }) => {
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">

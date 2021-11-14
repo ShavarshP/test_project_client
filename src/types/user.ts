@@ -13,6 +13,7 @@ export interface User {
   password: string;
   status: string;
   userName: string;
+  fullName:string;
   __v: number;
   _id: string;
   billingPlan: string;
@@ -35,12 +36,19 @@ export enum UserActionTypes {
   USER_DATA_UPDATE_CLICK = "USER_DATA_UPDATE_CLICK",
   ALL_USER_DATA_REGISTER = "ALL_USER_DATA_REGISTER",
   ALL_FETCH_USER_ERROR = "ALL_FETCH_USER_ERROR",
+  DATA_LOADING="USER_DATA_LOADING"
 }
 
 interface FetchUserErrorAction {
   type: UserActionTypes.FETCH_USER_ERROR;
   payload: string;
 }
+
+interface DataLoading {
+  type: UserActionTypes.DATA_LOADING;
+  payload: boolean;
+}
+
 interface AllFetchUserErrorAction {
   type: UserActionTypes.ALL_FETCH_USER_ERROR;
   payload: string;
@@ -76,4 +84,4 @@ export type UserAction =
   | FetchUpdateTokenAction
   | UserUpdateUpdateClick
   | GetAllUserData
-  | AllFetchUserErrorAction;
+  | AllFetchUserErrorAction|DataLoading;

@@ -9,10 +9,6 @@ import UserPage from "../pages/userPage";
 
 export const useRoutes = () => {
   const { user } = useTypedSelector((state) => state.user);
-  console.log(
-    "router",
-    useTypedSelector((state) => state.user)
-  );
   return (
     <Switch>
       {!user._id ? (
@@ -33,7 +29,10 @@ export const useRoutes = () => {
           <Route path="/user_config">
             <UserConfig />
           </Route>
-          <Redirect to="/home" />
+          <Route path="/edit_user_config/:id">
+            <UserConfig />
+          </Route>
+          <Redirect from="" to="/home" />
         </>
       ) : (
         <>

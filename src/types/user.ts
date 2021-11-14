@@ -1,11 +1,3 @@
-// export interface TodoState {
-//   todos: any[];
-//   loading: boolean;
-//   error: null | string;
-//   page: number;
-//   limit: number;
-// }
-
 export interface User {
   activationLink: string;
   email: string;
@@ -13,7 +5,7 @@ export interface User {
   password: string;
   status: string;
   userName: string;
-  fullName:string;
+  fullName: string;
   __v: number;
   _id: string;
   billingPlan: string;
@@ -21,13 +13,6 @@ export interface User {
   Click: number;
 }
 
-// export enum TodoActionTypes {
-//   FETCH_TODOS = "FETCH_TODOS",
-//   FETCH_TODOS_SUCCESS = "FETCH_TODOS_SUCCESS",
-//   FETCH_TODOS_ERROR = "FETCH_TODOS_ERROR",
-//   SET_TODO_PAGE = "SET_TODO_PAGE",
-//   USER_DATA_REGISTER = "USER_DATA_REGISTER",
-// }
 export enum UserActionTypes {
   USER_DATA_REGISTER = "USER_DATA_REGISTER",
   FETCH_USER_ERROR = "FETCH_USER_ERROR",
@@ -36,7 +21,7 @@ export enum UserActionTypes {
   USER_DATA_UPDATE_CLICK = "USER_DATA_UPDATE_CLICK",
   ALL_USER_DATA_REGISTER = "ALL_USER_DATA_REGISTER",
   ALL_FETCH_USER_ERROR = "ALL_FETCH_USER_ERROR",
-  DATA_LOADING="USER_DATA_LOADING"
+  DATA_LOADING = "USER_DATA_LOADING",
 }
 
 interface FetchUserErrorAction {
@@ -84,4 +69,5 @@ export type UserAction =
   | FetchUpdateTokenAction
   | UserUpdateUpdateClick
   | GetAllUserData
-  | AllFetchUserErrorAction|DataLoading;
+  | AllFetchUserErrorAction
+  | DataLoading;

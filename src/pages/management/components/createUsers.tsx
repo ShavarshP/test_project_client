@@ -49,7 +49,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const CreateUsers: React.FC = () => {
-  let history = useHistory();
+  const history = useHistory();
 
   return (
     <form>

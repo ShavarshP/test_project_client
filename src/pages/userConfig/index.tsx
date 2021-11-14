@@ -16,6 +16,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { useActions } from "../../hooks/useActions";
+import { useHistory, useParams } from "react-router-dom";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 const billingPlan = [
   { name: "standard", price: "  0$", id: 10 },
@@ -32,8 +34,36 @@ const UserConfig: React.FC = () => {
     billingPlan: "",
     showPassword: false,
   });
+  let userData: any = null;
+  const history = useHistory();
+  const { id } = useParams();
 
-  const { AdminRegistration, setLoading } = useActions();
+  const { allUsers } = useTypedSelector((state) => state.admin);
+
+  userData = allUsers.find((item) => item._id === id);
+
+  React.useEffect(() => {
+    if (userData) {
+      setValues({
+        ...values,
+        fullName: userData.fullName,
+        userName: userData.userName,
+        email: userData.email,
+        password: userData.billingPlan,
+        billingPlan: userData.billingPlan,
+      });
+    }
+  }, []);
+  if (id) {
+    // console.log("sss", userData.email);
+    // setValues({
+    //   ...values,
+    //   email: userData.password,
+    //   password: userData.password,
+    // });
+  }
+
+  const { AdminRegistration, setLoading, updateUserData } = useActions();
 
   const onSubmit = async () => {
     const name = /^([A-Za-zéàë]{2,40} ?)+$/;
@@ -59,8 +89,30 @@ const UserConfig: React.FC = () => {
         values.billingPlan,
         values.password
       );
+      setLoading(true);
+      history.push("home");
     } else {
-      alert("ss");
+      alert("invalid data");
+    }
+    setLoading(true);
+  };
+
+  const onUpdate = async () => {
+    const name = /^([A-Za-zéàë]{2,40} ?)+$/;
+    const nameValue = name.test(values.fullName) || values.fullName === "";
+    const fullNameValue = name.test(values.fullName) || values.fullName === "";
+    if (nameValue && fullNameValue && values.billingPlan) {
+      await setLoading(false);
+      await updateUserData(
+        userData._id,
+        values.userName,
+        values.fullName,
+        values.billingPlan
+      );
+      setLoading(true);
+      history.push("home");
+    } else {
+      alert("invalid data");
     }
     setLoading(true);
   };
@@ -83,7 +135,12 @@ const UserConfig: React.FC = () => {
 
   return (
     <div>
-      <div style={{ color: "red", cursor: "pointer", width: "40px" }}>
+      <div
+        style={{ color: "red", cursor: "pointer", width: "40px" }}
+        onClick={() => {
+          history.push("/home");
+        }}
+      >
         <ArrowBackIcon fontSize="large" />
       </div>
       <br />
@@ -95,33 +152,34 @@ const UserConfig: React.FC = () => {
           <div>
             <div style={{ display: "flex" }}>
               <Grid item xs={12} sm={6} m={1}>
-                <Grid item xs={12} sm={6} m={1}>
-                  <TextField
-                    required
-                    id="fullName"
-                    name="fullName"
-                    label="fullName"
-                    fullWidth
-                    margin="dense"
-                    error={"" ? true : false}
-                    value={values.fullName}
-                    onChange={handleChange("fullName")}
-                  />
-                  <Typography variant="inherit" color="textSecondary">
-                    {/* {errors.username?.message} */}
-                  </Typography>
-                </Grid>
                 <TextField
                   required
-                  id="username"
-                  name="email"
-                  label="email"
+                  id="fullName"
+                  name="fullName"
+                  label="Full Name"
+                  fullWidth
+                  margin="dense"
+                  error={"" ? true : false}
+                  value={values.fullName}
+                  onChange={handleChange("fullName")}
+                />
+                <Typography
+                  variant="inherit"
+                  color="textSecondary"
+                ></Typography>
+              </Grid>
+              <Grid item xs={12} sm={6} m={1}>
+                <TextField
+                  required
+                  id="name"
+                  name="name"
+                  label="Nser Name"
                   fullWidth
                   margin="dense"
                   // {...register("username")}
                   error={"" ? true : false}
-                  value={values.email}
-                  onChange={handleChange("email")}
+                  value={values.userName}
+                  onChange={handleChange("userName")}
                 />
                 <Typography variant="inherit" color="textSecondary">
                   {/* {errors.username?.message} */}
@@ -132,18 +190,19 @@ const UserConfig: React.FC = () => {
                 <TextField
                   required
                   id="email"
-                  name="userName"
-                  label="userName"
+                  name="email"
+                  autoComplete="on"
+                  label="email"
                   fullWidth
                   margin="dense"
-                  // {...register("email")}
-                  value={values.userName}
-                  onChange={handleChange("userName")}
+                  value={values.email}
+                  onChange={() => (userData ? null : handleChange("email"))}
                   error={"" ? true : false}
                 />
-                <Typography variant="inherit" color="textSecondary">
-                  {/* {errors.email?.message} */}
-                </Typography>
+                <Typography
+                  variant="inherit"
+                  color="textSecondary"
+                ></Typography>
               </Grid>
             </div>
 
@@ -156,7 +215,7 @@ const UserConfig: React.FC = () => {
                 id="standard-adornment-password"
                 type={values.showPassword ? "text" : "password"}
                 value={values.password}
-                onChange={handleChange("password")}
+                onChange={() => (userData ? null : handleChange("password"))}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -210,16 +269,29 @@ const UserConfig: React.FC = () => {
           </div>
         </Box>
       </div>
-      <Button
-        onClick={() => {
-          onSubmit();
-        }}
-        variant="contained"
-        color="success"
-        style={{ margin: "20px" }}
-      >
-        Add new user
-      </Button>
+      {userData ? (
+        <Button
+          onClick={() => {
+            onUpdate();
+          }}
+          variant="contained"
+          color="success"
+          style={{ margin: "20px" }}
+        >
+          Update
+        </Button>
+      ) : (
+        <Button
+          onClick={() => {
+            onSubmit();
+          }}
+          variant="contained"
+          color="success"
+          style={{ margin: "20px" }}
+        >
+          Create +
+        </Button>
+      )}
     </div>
   );
 };

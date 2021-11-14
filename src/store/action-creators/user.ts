@@ -81,7 +81,6 @@ export const getUserData = () => {
           withCredentials: true,
         },
       });
-      console.log(user.data.users);
       dispatch({
         type: UserActionTypes.USER_DATA_REGISTER,
         payload: user.data.users,
@@ -98,7 +97,6 @@ export const getUserData = () => {
 export const updateAccessToken = () => {
   return async (dispatch: Dispatch<UserAction>) => {
     try {
-      // console.log("samsonnnnnnn");
       const response = await axios.get(`${API_URL}/refresh`, {
         withCredentials: true,
       });

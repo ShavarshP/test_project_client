@@ -14,7 +14,6 @@ const App = () => {
   if (!loading && !error) {
     getUserData();
   } else if (!updateToken && error) {
-    console.log("getUserData();");
     updateAccessToken();
   }
   console.log(useTypedSelector((state) => state.user));

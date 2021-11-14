@@ -53,7 +53,6 @@ const SignUp: React.FC = () => {
       email: !emailValue,
       password: !passwordValue,
     });
-    console.log(valid);
   };
 
   return (

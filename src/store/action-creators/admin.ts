@@ -10,13 +10,12 @@ export const updateClickCount = () => {
   return async (dispatch: Dispatch<UserAction>) => {
     try {
       const token = await loadState("accessToken");
-      const data = await axios.put(`${API_URL}/update-click-count`, null, {
+      await axios.put(`${API_URL}/update-click-count`, null, {
         headers: {
           Authorization: `Bearer ${token.accessToken}`,
           withCredentials: true,
         },
       });
-      console.log(data);
     } catch (e) {
       dispatch({
         type: UserActionTypes.FETCH_USER_ERROR,
@@ -36,7 +35,6 @@ export const getAllUserData = () => {
           withCredentials: true,
         },
       });
-      console.log(user.data.users);
       dispatch({
         type: UserActionTypes.ALL_USER_DATA_REGISTER,
         payload: user.data.users,
@@ -80,21 +78,29 @@ export const AdminRegistration = (
 };
 
 export const updateUserData = (
-  email: string,
+  UserId: string,
   userName: string,
   fullName: string,
-  billingPlan: string,
-  password: string
+  billingPlan: string
 ) => {
   return async (dispatch: Dispatch<UserAction>) => {
     try {
-      await axios.put("http://localhost:5000/api/registration", {
-        email: email,
-        userName: userName,
-        fullName: fullName,
-        billingPlan: billingPlan,
-        password: password,
-      });
+      const token = await loadState("accessToken");
+      await axios.put(
+        "http://localhost:5000/api/update-user",
+        {
+          UserId,
+          userName,
+          fullName,
+          billingPlan,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token.accessToken}`,
+            withCredentials: true,
+          },
+        }
+      );
       dispatch({
         type: UserActionTypes.DATA_LOADING,
         payload: true,

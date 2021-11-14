@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import Paper from "@mui/material/Paper";
+import { useHistory } from "react-router-dom";
 // import IconButton from "@mui/material/IconButton";
 
 export interface user {
@@ -23,6 +24,8 @@ interface userData {
 }
 
 const UserList: React.FC<userData> = ({ data }) => {
+  const history = useHistory();
+
   const rows = data;
   return (
     <TableContainer component={Paper} style={{ height: "300px" }}>
@@ -49,11 +52,11 @@ const UserList: React.FC<userData> = ({ data }) => {
               <TableCell align="right">{row.click}</TableCell>
               <TableCell
                 onClick={() => {
-                  console.log(row.id);
+                  history.push(`/edit_user_config/${row.id}`);
                 }}
                 component="th"
                 scope="row"
-                style={{ marginRight: "-20px", cursor: "pointer" }}
+                style={{ marginRight: "-120px", cursor: "pointer" }}
               >
                 <EditIcon color="primary" />
               </TableCell>
@@ -64,8 +67,7 @@ const UserList: React.FC<userData> = ({ data }) => {
                 component="th"
                 scope="row"
                 style={{
-                  width: "30px",
-                  marginRight: "20px",
+                  marginLeft: "20px",
                   cursor: "pointer",
                 }}
               >

@@ -21,6 +21,8 @@ export const adminData = (
       return { ...state, allUsers: action.payload, adminLoading: true };
     case UserActionTypes.ALL_FETCH_USER_ERROR:
       return { ...state, adminError: action.payload, adminLoading: true };
+    case UserActionTypes.ADMIn_DATA_LOADING:
+      return { ...state, adminLoading: action.payload };
     default:
       return state;
   }

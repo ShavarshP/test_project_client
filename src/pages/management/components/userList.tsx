@@ -27,7 +27,7 @@ interface userData {
 const UserList: React.FC<userData> = ({ data }) => {
   const history = useHistory();
 
-  const { deleteUserData, getAllUserData } = useActions();
+  const { deleteUserData } = useActions();
   const rows = data;
 
   return (
@@ -35,10 +35,16 @@ const UserList: React.FC<userData> = ({ data }) => {
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>Username</TableCell>
-            <TableCell align="right">Billing Plan</TableCell>
-            <TableCell align="right">visits</TableCell>
-            <TableCell align="right">Click</TableCell>
+            <TableCell style={{ fontSize: "100%" }}>Username</TableCell>
+            <TableCell style={{ fontSize: "100%" }} align="right">
+              Billing Plan
+            </TableCell>
+            <TableCell style={{ fontSize: "100%" }} align="right">
+              visits
+            </TableCell>
+            <TableCell style={{ fontSize: "116%" }} align="right">
+              Click
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -66,7 +72,6 @@ const UserList: React.FC<userData> = ({ data }) => {
               <TableCell
                 onClick={async () => {
                   await deleteUserData(row.id);
-                  await getAllUserData();
                 }}
                 component="th"
                 scope="row"

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useActions } from "../../../hooks/useActions";
 import Form from "../components/form";
+
 interface loginForm {
   email: string;
   password: string;
@@ -19,22 +20,23 @@ const LogIn: React.FC = () => {
     email: false,
     password: false,
   });
-  const { authLogin, setLoading } = useActions();
+  const { loginUser } = useActions();
 
   const onSubmit = (data: loginForm) => {
     if (!valid.email && !valid.password && !valid.userName && !valid.fullName) {
-      authLogin(data.email, data.password);
+      // loginData(data.email, data.password);
+      loginUser(data.email, data.password);
     } else {
       alert("invalid data");
     }
   };
 
-  const isValid = async (form: loginForm) => {
+  const isValid = (form: loginForm) => {
     const email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     const password = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     const passwordValue = password.test(form.password) || form.password === "";
     const emailValue = email.test(form.email) || form.email === "";
-    await setLoading(false);
+
     setValid({
       userName: false,
       fullName: false,

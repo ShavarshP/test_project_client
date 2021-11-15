@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useActions } from "../../hooks/useActions";
 import { useSearch } from "../../hooks/useSearch";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
@@ -32,24 +32,29 @@ const Management: React.FC = () => {
   const checked = (prop: string, checked: boolean) => {
     setCheck({ ...check, [prop]: checked });
   };
-
-  const allUserData = allUsers.map((item) => {
-    return {
-      name: item.userName,
-      plan: item.billingPlan,
-      visits: item.visits,
-      click: item.Click,
-      id: item._id,
-    };
-  });
+  const allUserData = useMemo(
+    () =>
+      allUsers.map((item) => {
+        return {
+          name: item.userName,
+          plan: item.billingPlan,
+          visits: item.visits,
+          click: item.Click,
+          id: item._id,
+        };
+      }),
+    [allUsers]
+  );
 
   if (!adminLoading) {
+    console.log("maladec");
     getAllUserData();
   } else {
     if (!(dat.length < 1) && dat[0].id === "") {
       setData(allUserData);
     }
   }
+
   useEffect(() => {
     if (dat.length === 0 || !(dat[0].id === "")) {
       setData(
@@ -58,7 +63,15 @@ const Management: React.FC = () => {
         )
       );
     }
-  }, [check.comfort, check.premium, check.standard, searchData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    check.comfort,
+    check.premium,
+    check.standard,
+    searchData,
+    allUsers.length,
+    allUserData,
+  ]);
 
   const lookFor = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchData(event.target.value);

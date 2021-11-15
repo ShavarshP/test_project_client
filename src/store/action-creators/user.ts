@@ -6,34 +6,6 @@ import { UserAction, UserActionTypes } from "../../types/user";
 
 const API_URL = "http://localhost:5000/api";
 
-export const authLogin = (email: string, password: string) => {
-  return async (dispatch: Dispatch<UserAction>) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/api/login",
-        {
-          email: email,
-          password: password,
-        },
-        { withCredentials: true }
-      );
-      saveState("accessToken", { accessToken: response.data.accessToken });
-      const user = await axios.get("http://localhost:5000/api/user", {
-        headers: { Authorization: `Bearer ${response.data.accessToken}` },
-      });
-      dispatch({
-        type: UserActionTypes.USER_DATA_REGISTER,
-        payload: user.data.users,
-      });
-    } catch (e) {
-      dispatch({
-        type: UserActionTypes.FETCH_USER_ERROR,
-        payload: "An error has occurred",
-      });
-    }
-  };
-};
-
 export const registration = (
   email: string,
   userName: string,
@@ -63,6 +35,7 @@ export const registration = (
         payload: user.data.users,
       });
     } catch (e) {
+      alert("invalid data");
       dispatch({
         type: UserActionTypes.FETCH_USER_ERROR,
         payload: "An error has occurred",
@@ -136,12 +109,31 @@ export const UserLogout = () => {
     }
   };
 };
-
-// export const refreshPage = () => {
-//   return async (dispatch: Dispatch<UserAction>) => {
-//     dispatch({
-//       type: UserActionTypes.FETCH_USER_ERROR,
-//       payload: "An error has occurred",
-//     });
-//   };
-// };
+export const loginUser = (email: string, password: string) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/login-user",
+        {
+          email: email,
+          password: password,
+        },
+        { withCredentials: true }
+      );
+      saveState("accessToken", { accessToken: response.data.accessToken });
+      const user = await axios.get("http://localhost:5000/api/user", {
+        headers: { Authorization: `Bearer ${response.data.accessToken}` },
+      });
+      dispatch({
+        type: UserActionTypes.USER_DATA_REGISTER,
+        payload: user.data.users,
+      });
+    } catch (e) {
+      alert("invalid data");
+      dispatch({
+        type: UserActionTypes.FETCH_USER_ERROR,
+        payload: "An error has occurred",
+      });
+    }
+  };
+};

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import * as React from "react";
 import styles from "./style.module.css";
 
@@ -34,8 +35,7 @@ const UserConfig: React.FC = () => {
     billingPlan: "",
     showPassword: false,
   });
-  const { AdminRegistration, setLoading, updateUserData, getAllUserData } =
-    useActions();
+  const { AdminRegistration, setLoading, updateUserData } = useActions();
   let userData: any = null;
   const history = useHistory();
   const { id } = useParams();
@@ -80,17 +80,15 @@ const UserConfig: React.FC = () => {
         values.billingPlan,
         values.password
       );
-      setLoading(true);
       history.push("home");
     } else {
       alert("invalid data");
     }
-    setLoading(true);
   };
 
   const onUpdate = async () => {
     const name = /^([A-Za-zéàë]{2,40} ?)+$/;
-    const nameValue = name.test(values.fullName) || values.fullName === "";
+    const nameValue = name.test(values.userName) || values.userName === "";
     const fullNameValue = name.test(values.fullName) || values.fullName === "";
     if (nameValue && fullNameValue && values.billingPlan) {
       await setLoading(false);
@@ -100,13 +98,13 @@ const UserConfig: React.FC = () => {
         values.fullName,
         values.billingPlan
       );
-      setLoading(true);
-      getAllUserData();
+      // setLoading(true);
       history.push("home");
     } else {
+      console.log(nameValue, fullNameValue, values.billingPlan);
       alert("invalid data");
     }
-    setLoading(true);
+    // setLoading(true);
   };
 
   const handleChange =

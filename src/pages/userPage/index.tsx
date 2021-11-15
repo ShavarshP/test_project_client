@@ -10,7 +10,7 @@ import { useActions } from "../../hooks/useActions";
 
 const UserPage: React.FC = () => {
   const { user } = useTypedSelector((state) => state.user);
-  const { updateClickCount, UserLogout, setLoading } = useActions();
+  const { updateClickCount, UserLogout } = useActions();
 
   const card = (
     <React.Fragment>
@@ -58,7 +58,6 @@ const UserPage: React.FC = () => {
         color="primary"
         onClick={async () => {
           await UserLogout();
-          // setLoading(true);
         }}
       >
         log out

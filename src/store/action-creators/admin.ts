@@ -21,6 +21,7 @@ export const updateClickCount = () => {
         payload: 1,
       });
     } catch (e) {
+      alert("invalid data");
       dispatch({
         type: UserActionTypes.FETCH_USER_ERROR,
         payload: "An error has occurred",
@@ -69,10 +70,11 @@ export const AdminRegistration = (
         password: password,
       });
       dispatch({
-        type: UserActionTypes.DATA_LOADING,
-        payload: true,
+        type: UserActionTypes.ADMIn_DATA_LOADING,
+        payload: false,
       });
     } catch (e) {
+      alert("invalid data");
       dispatch({
         type: UserActionTypes.FETCH_USER_ERROR,
         payload: "An error has occurred",
@@ -106,10 +108,11 @@ export const updateUserData = (
         }
       );
       dispatch({
-        type: UserActionTypes.DATA_LOADING,
-        payload: true,
+        type: UserActionTypes.ADMIn_DATA_LOADING,
+        payload: false,
       });
     } catch (e) {
+      alert("invalid data");
       dispatch({
         type: UserActionTypes.FETCH_USER_ERROR,
         payload: "An error has occurred",
@@ -130,8 +133,8 @@ export const deleteUserData = (UserId: string) => {
         },
       });
       dispatch({
-        type: UserActionTypes.DATA_LOADING,
-        payload: true,
+        type: UserActionTypes.ADMIn_DATA_LOADING,
+        payload: false,
       });
     } catch (e) {
       dispatch({

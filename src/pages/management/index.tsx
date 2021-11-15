@@ -47,7 +47,6 @@ const Management: React.FC = () => {
   );
 
   if (!adminLoading) {
-    console.log("maladec");
     getAllUserData();
   } else {
     if (!(dat.length < 1) && dat[0].id === "") {

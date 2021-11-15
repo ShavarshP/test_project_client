@@ -19,7 +19,6 @@ const App = () => {
       updateAccessToken();
     }
   }, [loading, updateToken, error]);
-  console.log(useTypedSelector((state) => state.user));
 
   return (
     <div style={{ display: "flex", justifyContent: "center", padding: "5%" }}>

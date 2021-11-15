@@ -16,7 +16,7 @@ export const registration = (
   return async (dispatch: Dispatch<UserAction>) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/registration",
+        `${API_URL}/registration`,
         {
           email: email,
           userName: userName,
@@ -27,7 +27,7 @@ export const registration = (
         { withCredentials: true }
       );
       saveState("accessToken", { accessToken: response.data.accessToken });
-      const user = await axios.get("http://localhost:5000/api/user", {
+      const user = await axios.get(`${API_URL}/user`, {
         headers: { Authorization: `Bearer ${response.data.accessToken}` },
       });
       dispatch({
@@ -48,7 +48,7 @@ export const getUserData = () => {
   return async (dispatch: Dispatch<UserAction>) => {
     try {
       const token = await loadState("accessToken");
-      const user = await axios.get("http://localhost:5000/api/user", {
+      const user = await axios.get(`${API_URL}/user`, {
         headers: {
           Authorization: `Bearer ${token.accessToken}`,
           withCredentials: true,
@@ -113,7 +113,7 @@ export const loginUser = (email: string, password: string) => {
   return async (dispatch: Dispatch<UserAction>) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/login-user",
+        `${API_URL}/login-user`,
         {
           email: email,
           password: password,
@@ -121,7 +121,7 @@ export const loginUser = (email: string, password: string) => {
         { withCredentials: true }
       );
       saveState("accessToken", { accessToken: response.data.accessToken });
-      const user = await axios.get("http://localhost:5000/api/user", {
+      const user = await axios.get(`${API_URL}/user`, {
         headers: { Authorization: `Bearer ${response.data.accessToken}` },
       });
       dispatch({

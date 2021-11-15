@@ -102,7 +102,6 @@ const UserConfig: React.FC = () => {
       // setLoading(true);
       history.push("home");
     } else {
-      console.log(nameValue, fullNameValue, values.billingPlan);
       alert("invalid data");
     }
     // setLoading(true);

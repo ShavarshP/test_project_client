@@ -22,10 +22,11 @@ const SignUp: React.FC = () => {
     email: false,
     password: false,
   });
-  const { registration } = useActions();
+  const { registration, setLoading } = useActions();
 
-  const onSubmit = (data: loginForm) => {
+  const onSubmit = async (data: loginForm) => {
     if (!valid.email && !valid.password && !valid.userName && !valid.fullName) {
+      await setLoading(false);
       registration(
         data.email,
         data.userName,
@@ -40,6 +41,7 @@ const SignUp: React.FC = () => {
 
   const isValid = (form: loginForm) => {
     const name = /^([A-Za-zéàë]{2,40} ?)+$/;
+    // eslint-disable-next-line no-useless-escape
     const email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     const password = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     const nameValue = name.test(form.fullName) || form.fullName === "";

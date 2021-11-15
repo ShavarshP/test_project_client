@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { useRoutes } from "./helpers/routes";
 import { useActions } from "./hooks/useActions";
@@ -11,11 +12,13 @@ const App = () => {
   const { loading, error, updateToken } = useTypedSelector(
     (state) => state.user
   );
-  if (!loading && !error) {
-    getUserData();
-  } else if (!updateToken && error) {
-    updateAccessToken();
-  }
+  useEffect(() => {
+    if (!loading && !error) {
+      getUserData();
+    } else if (!updateToken && error) {
+      updateAccessToken();
+    }
+  }, [loading, updateToken, error]);
   console.log(useTypedSelector((state) => state.user));
 
   return (

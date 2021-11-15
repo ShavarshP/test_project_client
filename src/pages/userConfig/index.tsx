@@ -58,6 +58,7 @@ const UserConfig: React.FC = () => {
 
   const onSubmit = async () => {
     const name = /^([A-Za-zéàë]{2,40} ?)+$/;
+    // eslint-disable-next-line no-useless-escape
     const email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     const password = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     const nameValue = name.test(values.fullName) || values.fullName === "";

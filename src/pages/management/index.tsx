@@ -27,7 +27,7 @@ const Management: React.FC = () => {
   ]);
 
   const { allUsers, adminLoading } = useTypedSelector((state) => state.admin);
-  const { getAllUserData, UserLogout, setLoading } = useActions();
+  const { getAllUserData, UserLogout } = useActions();
   const { searchFunc } = useSearch();
   const checked = (prop: string, checked: boolean) => {
     setCheck({ ...check, [prop]: checked });
@@ -87,7 +87,6 @@ const Management: React.FC = () => {
           color="primary"
           onClick={async () => {
             await UserLogout();
-            setLoading(true);
           }}
         >
           log out

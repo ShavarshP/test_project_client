@@ -20,11 +20,11 @@ const LogIn: React.FC = () => {
     email: false,
     password: false,
   });
-  const { loginUser } = useActions();
+  const { loginUser, setLoading } = useActions();
 
-  const onSubmit = (data: loginForm) => {
+  const onSubmit = async (data: loginForm) => {
     if (!valid.email && !valid.password && !valid.userName && !valid.fullName) {
-      // loginData(data.email, data.password);
+      await setLoading(false);
       loginUser(data.email, data.password);
     } else {
       alert("invalid data");
@@ -32,6 +32,7 @@ const LogIn: React.FC = () => {
   };
 
   const isValid = (form: loginForm) => {
+    // eslint-disable-next-line no-useless-escape
     const email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     const password = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     const passwordValue = password.test(form.password) || form.password === "";

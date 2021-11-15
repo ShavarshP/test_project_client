@@ -48,7 +48,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const CreateUsers: React.FC = () => {
+export interface check {
+  standard: boolean;
+  comfort: boolean;
+  premium: boolean;
+}
+
+interface filter {
+  check: any | check;
+  checked(prop: string, checked: boolean): void;
+  lookFor(event: React.ChangeEvent<HTMLInputElement>): void;
+}
+
+const CreateUsers: React.FC<filter> = ({ check, checked, lookFor }) => {
   const history = useHistory();
 
   return (
@@ -78,12 +90,46 @@ const CreateUsers: React.FC = () => {
           <StyledInputBase
             placeholder="Search…"
             inputProps={{ "aria-label": "search" }}
+            onChange={lookFor}
           />
         </Search>
         <div>
-          <FormControlLabel value="female" control={<Radio />} label="Female" />
-          <FormControlLabel value="male" control={<Radio />} label="Male" />
-          <FormControlLabel value="other" control={<Radio />} label="Other" />
+          <FormControlLabel
+            value="standard"
+            control={
+              <Radio
+                checked={check.standard}
+                onClick={() => {
+                  checked("standard", !check.standard);
+                }}
+              />
+            }
+            label="standard"
+          />
+          <FormControlLabel
+            value="comfort"
+            control={
+              <Radio
+                checked={check.comfort}
+                onClick={() => {
+                  checked("comfort", !check.comfort);
+                }}
+              />
+            }
+            label="comfort"
+          />
+          <FormControlLabel
+            value="premium"
+            control={
+              <Radio
+                checked={check.premium}
+                onClick={() => {
+                  checked("premium", !check.premium);
+                }}
+              />
+            }
+            label="premium"
+          />
         </div>
       </div>
     </form>

@@ -9,6 +9,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import Paper from "@mui/material/Paper";
 import { useHistory } from "react-router-dom";
+import { useActions } from "../../../hooks/useActions";
 // import IconButton from "@mui/material/IconButton";
 
 export interface user {
@@ -26,7 +27,9 @@ interface userData {
 const UserList: React.FC<userData> = ({ data }) => {
   const history = useHistory();
 
+  const { deleteUserData, getAllUserData } = useActions();
   const rows = data;
+
   return (
     <TableContainer component={Paper} style={{ height: "300px" }}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -61,8 +64,9 @@ const UserList: React.FC<userData> = ({ data }) => {
                 <EditIcon color="primary" />
               </TableCell>
               <TableCell
-                onClick={() => {
-                  console.log(row.id);
+                onClick={async () => {
+                  await deleteUserData(row.id);
+                  await getAllUserData();
                 }}
                 component="th"
                 scope="row"

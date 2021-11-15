@@ -16,6 +16,10 @@ export const updateClickCount = () => {
           withCredentials: true,
         },
       });
+      dispatch({
+        type: UserActionTypes.USER_DATA_UPDATE_CLICK,
+        payload: 1,
+      });
     } catch (e) {
       dispatch({
         type: UserActionTypes.FETCH_USER_ERROR,
@@ -101,6 +105,30 @@ export const updateUserData = (
           },
         }
       );
+      dispatch({
+        type: UserActionTypes.DATA_LOADING,
+        payload: true,
+      });
+    } catch (e) {
+      dispatch({
+        type: UserActionTypes.FETCH_USER_ERROR,
+        payload: "An error has occurred",
+      });
+    }
+  };
+};
+
+export const deleteUserData = (UserId: string) => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      const token = await loadState("accessToken");
+      await axios.delete("http://localhost:5000/api/delete-user", {
+        data: { UserId: UserId },
+        headers: {
+          Authorization: `Bearer ${token.accessToken}`,
+          withCredentials: true,
+        },
+      });
       dispatch({
         type: UserActionTypes.DATA_LOADING,
         payload: true,

@@ -9,21 +9,14 @@ interface loginForm {
   isValid(data: any): void;
   valid: {
     userName: boolean;
-    fullName:boolean;
+    fullName: boolean;
     email: boolean;
     password: boolean;
   };
 }
 
 const Form: React.FC<loginForm> = ({ isLogin, onSubmit, isValid, valid }) => {
-  // const login = false;
   const { register, handleSubmit } = useForm();
-
-  // const registr = () => {};
-  // const login = () => {};
-  // const changePage = () => {
-  //   setIsLogin(true);
-  // };
 
   return (
     <div>
@@ -47,30 +40,30 @@ const Form: React.FC<loginForm> = ({ isLogin, onSubmit, isValid, valid }) => {
                 >
                   {isLogin ? (
                     <>
-                    <Grid item>
-                    <TextField
-                      type="user name"
-                      placeholder="User Name"
-                      fullWidth
-                      variant="outlined"
-                      {...register("userName")}
-                      error={valid.userName}
-                      required
-                      autoFocus={false}
-                    />
-                  </Grid>
-                    <Grid item>
-                      <TextField
-                        type="user name"
-                        placeholder="User Name"
-                        fullWidth
-                        variant="outlined"
-                        {...register("fullName")}
-                        error={valid.fullName}
-                        required
-                        autoFocus={false}
-                      />
-                    </Grid>
+                      <Grid item>
+                        <TextField
+                          type="user name"
+                          placeholder="User Name"
+                          fullWidth
+                          variant="outlined"
+                          {...register("userName")}
+                          error={valid.userName}
+                          required
+                          autoFocus={false}
+                        />
+                      </Grid>
+                      <Grid item>
+                        <TextField
+                          type="user name"
+                          placeholder="User Name"
+                          fullWidth
+                          variant="outlined"
+                          {...register("fullName")}
+                          error={valid.fullName}
+                          required
+                          autoFocus={false}
+                        />
+                      </Grid>
                     </>
                   ) : null}
                   <Grid container direction="column" spacing={2}>

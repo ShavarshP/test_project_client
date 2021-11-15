@@ -34,10 +34,11 @@ const UserConfig: React.FC = () => {
     billingPlan: "",
     showPassword: false,
   });
+  const { AdminRegistration, setLoading, updateUserData, getAllUserData } =
+    useActions();
   let userData: any = null;
   const history = useHistory();
   const { id } = useParams();
-
   const { allUsers } = useTypedSelector((state) => state.admin);
 
   userData = allUsers.find((item) => item._id === id);
@@ -54,16 +55,6 @@ const UserConfig: React.FC = () => {
       });
     }
   }, []);
-  if (id) {
-    // console.log("sss", userData.email);
-    // setValues({
-    //   ...values,
-    //   email: userData.password,
-    //   password: userData.password,
-    // });
-  }
-
-  const { AdminRegistration, setLoading, updateUserData } = useActions();
 
   const onSubmit = async () => {
     const name = /^([A-Za-zéàë]{2,40} ?)+$/;
@@ -110,6 +101,7 @@ const UserConfig: React.FC = () => {
         values.billingPlan
       );
       setLoading(true);
+      getAllUserData();
       history.push("home");
     } else {
       alert("invalid data");

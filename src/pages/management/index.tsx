@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useActions } from "../../hooks/useActions";
 import { useSearch } from "../../hooks/useSearch";
@@ -26,7 +27,7 @@ const Management: React.FC = () => {
   ]);
 
   const { allUsers, adminLoading } = useTypedSelector((state) => state.admin);
-  const { getAllUserData } = useActions();
+  const { getAllUserData, UserLogout, setLoading } = useActions();
   const { searchFunc } = useSearch();
   const checked = (prop: string, checked: boolean) => {
     setCheck({ ...check, [prop]: checked });
@@ -68,6 +69,16 @@ const Management: React.FC = () => {
       <div className={styles.container}>
         <CreateUsers check={check} checked={checked} lookFor={lookFor} />
         <UserList data={dat} />
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={async () => {
+            await UserLogout();
+            setLoading(false);
+          }}
+        >
+          log out
+        </Button>
       </div>
     </>
   );

@@ -42,8 +42,8 @@ const Form: React.FC<loginForm> = ({ isLogin, onSubmit, isValid, valid }) => {
                     <>
                       <Grid item>
                         <TextField
-                          type="user name"
-                          placeholder="User Name"
+                          type="user_name"
+                          placeholder="First Name or User Name"
                           fullWidth
                           variant="outlined"
                           {...register("userName")}
@@ -54,8 +54,8 @@ const Form: React.FC<loginForm> = ({ isLogin, onSubmit, isValid, valid }) => {
                       </Grid>
                       <Grid item>
                         <TextField
-                          type="user name"
-                          placeholder="User Name"
+                          type="fullName"
+                          placeholder="Full Name"
                           fullWidth
                           variant="outlined"
                           {...register("fullName")}

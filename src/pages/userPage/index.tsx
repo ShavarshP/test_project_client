@@ -7,10 +7,13 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useActions";
+import { useHistory } from "react-router-dom";
 
 const UserPage: React.FC = () => {
   const { user } = useTypedSelector((state) => state.user);
-  const { updateClickCount } = useActions();
+  const { updateClickCount, UserLogout, setLoading } = useActions();
+
+  const history = useHistory();
 
   const card = (
     <React.Fragment>
@@ -53,7 +56,14 @@ const UserPage: React.FC = () => {
         </div>
       </div>
       <br />
-      <Button variant="contained" color="primary">
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={async () => {
+          await UserLogout();
+          setLoading(true);
+        }}
+      >
         log out
       </Button>
     </div>

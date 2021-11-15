@@ -115,3 +115,24 @@ export const updateAccessToken = () => {
     }
   };
 };
+
+export const UserLogout = () => {
+  return async (dispatch: Dispatch<UserAction>) => {
+    try {
+      // const token = await loadState("accessToken");
+      await axios.get(`${API_URL}/logout`, {
+        withCredentials: true,
+      });
+      localStorage.removeItem("accessToken");
+      dispatch({
+        type: UserActionTypes.DATA_LOADING,
+        payload: true,
+      });
+    } catch (e) {
+      dispatch({
+        type: UserActionTypes.ALL_FETCH_USER_ERROR,
+        payload: "An error has occurred",
+      });
+    }
+  };
+};

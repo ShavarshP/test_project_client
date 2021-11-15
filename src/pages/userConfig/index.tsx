@@ -111,7 +111,9 @@ const UserConfig: React.FC = () => {
 
   const handleChange =
     (prop: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValues({ ...values, [prop]: event.target.value });
+      if (!(id && (prop === "email" || prop === "password"))) {
+        setValues({ ...values, [prop]: event.target.value });
+      }
     };
 
   const handleClickShowPassword = () => {
@@ -188,7 +190,7 @@ const UserConfig: React.FC = () => {
                   fullWidth
                   margin="dense"
                   value={values.email}
-                  onChange={() => (userData ? null : handleChange("email"))}
+                  onChange={handleChange("email")}
                   error={"" ? true : false}
                 />
                 <Typography
@@ -207,7 +209,7 @@ const UserConfig: React.FC = () => {
                 id="standard-adornment-password"
                 type={values.showPassword ? "text" : "password"}
                 value={values.password}
-                onChange={() => (userData ? null : handleChange("password"))}
+                onChange={handleChange("password")}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton

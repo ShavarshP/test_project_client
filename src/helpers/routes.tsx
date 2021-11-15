@@ -11,7 +11,7 @@ export const useRoutes = () => {
   const { user } = useTypedSelector((state) => state.user);
   return (
     <Switch>
-      {!user._id ? (
+      {!user.isActivated ? (
         <>
           <Route path="/login">
             <LogIn />

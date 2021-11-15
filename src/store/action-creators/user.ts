@@ -38,8 +38,8 @@ export const registration = (
   email: string,
   userName: string,
   fullName: string,
-  billingPlan: string,
-  password: string
+  password: string,
+  billingPlan: string
 ) => {
   return async (dispatch: Dispatch<UserAction>) => {
     try {
@@ -125,7 +125,7 @@ export const UserLogout = () => {
       });
       localStorage.removeItem("accessToken");
       dispatch({
-        type: UserActionTypes.DATA_LOADING,
+        type: UserActionTypes.DATA_USER_LOGOUT,
         payload: true,
       });
     } catch (e) {
@@ -136,3 +136,12 @@ export const UserLogout = () => {
     }
   };
 };
+
+// export const refreshPage = () => {
+//   return async (dispatch: Dispatch<UserAction>) => {
+//     dispatch({
+//       type: UserActionTypes.FETCH_USER_ERROR,
+//       payload: "An error has occurred",
+//     });
+//   };
+// };

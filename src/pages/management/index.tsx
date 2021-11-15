@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useActions } from "../../hooks/useActions";
 import { useSearch } from "../../hooks/useSearch";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import styles from "./style.module.css";
 import CreateUsers from "./components/createUsers";
 import UserList from "./components/userList";
-import styles from "./style.module.css";
 
 export interface user {
   name: string;
@@ -74,7 +74,7 @@ const Management: React.FC = () => {
           color="primary"
           onClick={async () => {
             await UserLogout();
-            setLoading(false);
+            setLoading(true);
           }}
         >
           log out

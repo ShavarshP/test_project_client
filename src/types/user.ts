@@ -22,6 +22,7 @@ export enum UserActionTypes {
   ALL_USER_DATA_REGISTER = "ALL_USER_DATA_REGISTER",
   ALL_FETCH_USER_ERROR = "ALL_FETCH_USER_ERROR",
   DATA_LOADING = "USER_DATA_LOADING",
+  DATA_USER_LOGOUT = "DATA_USER_LOGOUT",
 }
 
 interface FetchUserErrorAction {
@@ -31,6 +32,11 @@ interface FetchUserErrorAction {
 
 interface DataLoading {
   type: UserActionTypes.DATA_LOADING;
+  payload: boolean;
+}
+
+interface DataUserLogout {
+  type: UserActionTypes.DATA_USER_LOGOUT;
   payload: boolean;
 }
 
@@ -70,4 +76,4 @@ export type UserAction =
   | UserUpdateUpdateClick
   | GetAllUserData
   | AllFetchUserErrorAction
-  | DataLoading;
+  | DataLoading|DataUserLogout;

@@ -29,8 +29,8 @@ const SignUp: React.FC = () => {
       registration(
         data.email,
         data.userName,
-        data.password,
         data.fullName,
+        data.password,
         "standard"
       );
     } else {

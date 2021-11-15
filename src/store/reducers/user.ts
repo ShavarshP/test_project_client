@@ -50,9 +50,15 @@ export const userData = (
         updateToken: false,
         loading: false,
       };
+    case UserActionTypes.DATA_USER_LOGOUT:
+      state.user.isActivated = false;
+      return {
+        ...state,
+      };
     case UserActionTypes.DATA_LOADING:
       return {
         ...state,
+        error: "",
         loading: false,
       };
     case UserActionTypes.USER_DATA_UPDATE_CLICK:
